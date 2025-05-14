@@ -19,7 +19,15 @@
         "command": "phpdocwiki.helloWorld",
         "title": "Hello World"
       }
-    ]
+    ],
+    "views": {
+      "explorer": [
+        {
+          "id": "phpdocwiki.explorer",
+          "name": "PhpDocWiki"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
