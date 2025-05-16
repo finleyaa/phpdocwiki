@@ -16,8 +16,9 @@
   "contributes": {
     "commands": [
       {
-        "command": "phpdocwiki.helloWorld",
-        "title": "Hello World"
+        "command": "phpdocwiki.refresh",
+        "title": "Refresh",
+        "category": "PhpDocWiki"
       }
     ],
     "views": {

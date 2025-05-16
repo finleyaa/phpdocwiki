@@ -1,5 +1,10 @@
 import * as vscode from 'vscode';
 
+export const symbolRegex: {[type: string]: RegExp} = {
+  class: /class\s+(\w+)/,
+  method: /function\s+(\w+)\s*\(/,
+};
+
 export class Parameter {
   constructor(
     public readonly name: string,
@@ -23,4 +28,8 @@ export class Class {
     public readonly methods: Method[] = [],
     public readonly uri: vscode.Uri | null = null,
   ) {}
+
+  public addMethod(method: Method): void {
+    this.methods.push(method);
+  }
 }
