@@ -153,7 +153,7 @@ const parseComment = (symbolType: 'class' | 'method', comment: string): ParsedCo
                 parameters.push(new Parameter(
                     tag.name,
                     null,
-                    tag.description
+                    tag.description.length ? tag.description : null
                 ));
             }
             waitingForWord = false;

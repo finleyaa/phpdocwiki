@@ -66,8 +66,8 @@ class ClassTreeItem extends vscode.TreeItem {
     ) {
         const label = classEntity.name;
         super(label, collapsibleState);
-        this.tooltip = label;
         this.description = classEntity.description ?? 'No description provided';
+        this.tooltip = this.description;
         this.command = {
             command: 'vscode.open',
             title: 'Open File',
@@ -83,8 +83,8 @@ class MethodTreeItem extends vscode.TreeItem {
     ) {
         const label = methodEntity.name;
         super(label, collapsibleState);
-        this.tooltip = label;
         this.description = methodEntity.description ?? 'No description provided';
+        this.tooltip = this.description;
     }
 }
 
@@ -95,7 +95,7 @@ class ParameterTreeItem extends vscode.TreeItem {
     ) {
         const label = parameterEntity.name;
         super(label, collapsibleState);
-        this.tooltip = label;
         this.description = parameterEntity.description ?? 'No description provided';
+        this.tooltip = this.description;
     }
 }

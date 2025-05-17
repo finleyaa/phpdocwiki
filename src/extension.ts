@@ -1,6 +1,10 @@
 import * as vscode from 'vscode';
 import { PhpDocWikiTreeProvider } from './tree-provider';
 import { index } from './parser';
+import { search } from './search';
+import { Class } from './symbols';
+
+let indexedClasses: Class[] = [];
 
 function refresh(treeProvider: PhpDocWikiTreeProvider, statusBarItem: vscode.StatusBarItem): void {
 	const rootPath = vscode.workspace.workspaceFolders?.[0].uri.fsPath;
@@ -16,6 +20,7 @@ function refresh(treeProvider: PhpDocWikiTreeProvider, statusBarItem: vscode.Sta
     statusBarItem.show();
 
 	index(rootPath).then(classes => {
+		indexedClasses = classes;
         statusBarItem.text = `$(check) PhpDocWiki indexed ${classes.length} classes`;
 		statusBarItem.command = 'phpdocwiki.refresh';
 		statusBarItem.tooltip = 'Click to refresh the index';
@@ -40,6 +45,11 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	));
 	context.subscriptions.push(statusBarItem);
+
+	const searchCommand = vscode.commands.registerCommand('phpdocwiki.search', () => {
+		search(indexedClasses);
+	});
+	context.subscriptions.push(searchCommand);
 
 	vscode.commands.executeCommand('phpdocwiki.refresh');
 }
