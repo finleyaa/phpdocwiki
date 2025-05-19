@@ -14,14 +14,14 @@ function refresh(treeProvider: PhpDocWikiTreeProvider, statusBarItem: vscode.Sta
 		return;
 	}
 
-	statusBarItem.text = `$(sync~spin) PhpDocWiki indexing...`;
+	statusBarItem.text = `$(sync~spin) PHPDoc Wiki indexing...`;
 	statusBarItem.command = undefined;
 	statusBarItem.tooltip = 'Indexing...';
     statusBarItem.show();
 
 	index(rootPath).then(classes => {
 		indexedClasses = classes;
-        statusBarItem.text = `$(check) PhpDocWiki indexed ${classes.length} classes`;
+        statusBarItem.text = `$(check) PHPDoc Wiki indexed ${classes.length} classes`;
 		statusBarItem.command = 'phpdocwiki.refresh';
 		statusBarItem.tooltip = 'Click to refresh the index';
 		treeProvider.updateClasses(classes);

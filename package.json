@@ -1,8 +1,9 @@
 {
   "name": "phpdocwiki",
-  "displayName": "PhpDocWiki",
-  "description": "",
-  "version": "0.0.1",
+  "publisher": "finleydab",
+  "displayName": "PHPDoc Wiki",
+  "description": "Builds a wiki from PHPDoc comments in your codebase.",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.100.0"
   },
@@ -12,25 +13,46 @@
   "activationEvents": [
     "onStartupFinished"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/finleyaa/phpdocwiki.git"
+  },
+  "license": "GPL-3.0",
   "main": "./out/extension.js",
   "contributes": {
+    "configuration": {
+      "title": "PHPDoc Wiki",
+      "type": "object",
+      "properties": {
+        "phpdocwiki.excludePaths": {
+          "type": "array",
+          "default": [],
+          "description": "Ignore paths for PHPDoc Wiki. Will be added to **/{excludePaths}/**. If empty, **/vendor/** is ignored."
+        },
+        "phpdocwiki.includePaths": {
+          "type": "array",
+          "default": [],
+          "description": "Include paths for PHPDoc Wiki. Will be added to **/{includePaths}/**/*.php. If empty, all PHP files are included."
+        }
+      }
+    },
     "commands": [
       {
         "command": "phpdocwiki.refresh",
         "title": "Refresh",
-        "category": "PhpDocWiki"
+        "category": "PHPDoc Wiki"
       },
       {
         "command": "phpdocwiki.search",
         "title": "Search",
-        "category": "PhpDocWiki"
+        "category": "PHPDoc Wiki"
       }
     ],
     "views": {
       "explorer": [
         {
           "id": "phpdocwiki.explorer",
-          "name": "PhpDocWiki"
+          "name": "PHPDoc Wiki"
         }
       ]
     }

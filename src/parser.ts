@@ -52,9 +52,21 @@ const findPhpFiles = (folder: string): Promise<string[]> => {
 	return new Promise<string[]>((resolve, reject) => {
         const phpFiles: string[] = [];
 
+        const includePaths = vscode.workspace.getConfiguration('phpdocwiki').get<string[]>('includePaths');
+        let includePathsPattern = new vscode.RelativePattern(folder, '**/*.php');
+        if (includePaths?.length) {
+            includePathsPattern = new vscode.RelativePattern(folder, includePaths.map(path => `**/${path}/**/*.php`).join(','));
+        }
+
+        const excludePaths = vscode.workspace.getConfiguration('phpdocwiki').get<string[]>('excludePaths');
+        let excludePathsPattern = new vscode.RelativePattern(folder, '**/vendor/**');
+        if (excludePaths?.length) {
+            excludePathsPattern = new vscode.RelativePattern(folder, excludePaths.map(path => `**/${path}/**`).join(','));
+        }
+
         vscode.workspace.findFiles(
-            new vscode.RelativePattern(folder, '**/*.php'),
-            new vscode.RelativePattern(folder, '**/vendor/**')
+            includePathsPattern,
+            excludePathsPattern,
         ).then(uris => {
             uris.forEach((uri) => {
                 phpFiles.push(uri.fsPath);

@@ -26,7 +26,7 @@ export class Class {
     public readonly name: string,
     public readonly description: string | null,
     public readonly methods: Method[] = [],
-    public readonly uri: vscode.Uri | null = null,
+    public readonly uri: vscode.Uri,
   ) {}
 
   public addMethod(method: Method): void {

@@ -28,6 +28,7 @@ export class PhpDocWikiTreeProvider implements vscode.TreeDataProvider<vscode.Tr
 
     public updateClasses(classes: Class[]): void {
         this.classes = classes;
+        this.classes.sort((a, b) => a.uri.fsPath.localeCompare(b.uri.fsPath));
         this._onDidChangeTreeData.fire();
     }
 
